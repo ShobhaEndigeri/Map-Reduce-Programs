@@ -1,5 +1,3 @@
-package com.nsn.ae.upgrade.upgradeHbaseTable;
-
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hbase.client.Result;
 import org.apache.hadoop.hbase.client.Scan;
