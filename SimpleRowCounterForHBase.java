@@ -8,7 +8,7 @@ import org.apache.hadoop.hbase.mapreduce.TableMapper;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.output.NullOutputFormat;
 
-public class SimpleRowCounter  {
+public class SimpleRowCounterForHBase  {
 	static class RowCounterMapper extends TableMapper<ImmutableBytesWritable, Result> {
 		public static enum Counters { ROWS }
 		@Override
@@ -21,14 +21,14 @@ public class SimpleRowCounter  {
 		Configuration conf = new Configuration();
 
 		if (args.length != 1) {
-			System.err.println("Usage: SimpleRowCounter <tablename>");
+			System.err.println("Usage: SimpleRowCounterForHBase <tablename>");
 			return ;
 		}
 		String tableName = args[0];
 		Scan scan = new Scan();
 		scan.setFilter(new FirstKeyOnlyFilter());
 		Job job = new Job(conf, "RowCount");
-		job.setJarByClass(SimpleRowCounter.class);
+		job.setJarByClass(SimpleRowCounterForHBase.class);
 		TableMapReduceUtil.initTableMapperJob(tableName, scan,
 				RowCounterMapper.class, ImmutableBytesWritable.class, Result.class, job);
 		job.setNumReduceTasks(0);
