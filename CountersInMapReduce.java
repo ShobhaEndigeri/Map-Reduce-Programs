@@ -1,4 +1,3 @@
-
 import java.io.IOException;
 
 import org.apache.hadoop.conf.Configuration;
@@ -14,7 +13,7 @@ import org.apache.hadoop.mapreduce.lib.input.TextInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 
-public class MapReduceCounter {
+public class CountersInMapReduce {
 
 	private enum COUNTERS {
 		GOOD,
@@ -37,7 +36,7 @@ public class MapReduceCounter {
 	public static void main(String[] args) throws Exception {
 		Configuration conf = new Configuration();
 
-		Job job = new Job(conf, "MapReduceCounter");
+		Job job = new Job(conf, "CountersInMapReduce");
 
 		job.setOutputKeyClass(Text.class);
 		job.setOutputValueClass(IntWritable.class);
