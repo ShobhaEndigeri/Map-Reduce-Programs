@@ -71,7 +71,7 @@ class customPartitioner  extends Partitioner<IntWritable,IntWritable> {
 		// TODO Auto-generated method stub
 		if(noOfReduceTasks == 0)
 			return 0;
-		else if(noOfReduceTasks%2 == 0)
+		else if(key % 2 == 0)
 			return 0;
 		else
 			return 1;
