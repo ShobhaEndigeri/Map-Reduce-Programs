@@ -1,4 +1,4 @@
-package main.java.com.mapreduce.examples;
+package com.mapreduce.examples;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hbase.client.Result;

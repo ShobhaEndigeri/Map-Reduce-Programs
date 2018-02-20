@@ -1,4 +1,4 @@
-package main.java.com.mapreduce.examples;
+package com.mapreduce.examples;
 
 import java.io.IOException;
 import java.util.*;
