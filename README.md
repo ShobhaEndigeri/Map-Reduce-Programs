@@ -86,3 +86,43 @@ set hive.optimize.bucketmapjoin = true;
 
 set hive.optimize.bucketmapjoin.sortedmerge = true;
 -----------------------------
+ create table salesdata_source
+(salesperson_id int,
+product_id int,
+date_of_sale string)
+
+
+Static partitioning
+We specify that value of the partition while inserting the data.
+
+insert into table salesdata partition (date_of_sale=’10-27-2017’)
+select * from salesdata_source where date_of_sale=’10-27-2017’;
+insert into table salesdata partition (date_of_sale=’10-28-2017’)
+select * from salesdata_source where date_of_sale=’10-28-2017’;
+
+
+Dynamic partitioning
+There is another way of partitioning where we let the Hive engine dynamically determine the partitions based on the values of the partition column.
+
+Before using this, we have to set a property that allows dynamic partition:
+ 
+
+set hive.exec.dynamic.partition.mode=nonstrict;
+
+hive> insert into table salesdata partition (date_of_sale)
+select salesperson_id,product_id,date_of_sale from salesdata_source ;
+
+
+
+Alter partiotion
+----------------
+1. alter table salesdata partition (date_of_sale=10-27-2017) rename to partition (date_of_sale=10-27-2018);
+Partition name will be changed(can be verified by show partitions), and the subdirectory name in the warehouse will be changed, but the data underneath will remain same.
+ 
+
+2. alter table salesdata drop partition (date_of_sale=10-27-2017) ; (internal table)
+Partition will be dropped and the subdirectory will be deleted.
+ 
+
+3. alter table salesdata_ext drop partition (date_of_sale=10-27-2017) ; (external table)
+-------------------------------------
